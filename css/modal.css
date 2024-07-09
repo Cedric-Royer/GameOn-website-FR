@@ -98,7 +98,7 @@ img {
     display: block;
     margin-top: -15px;
   }
-} 
+ }
 
 main {
   font-size: 130%;
@@ -336,6 +336,7 @@ input {
   color: #fff;
   cursor: pointer;
   border: 0;
+  text-align: center;
 }
 /* custom select styles */
 .custom-select {
@@ -484,6 +485,7 @@ footer {
 }
 @media screen and (max-width: 800px) {
   .hero-section {
+    max-height: 200vh;
     display: block;
     box-shadow: unset;
   }
@@ -530,4 +532,3 @@ footer {
     opacity: 1;
   }
 }
-
