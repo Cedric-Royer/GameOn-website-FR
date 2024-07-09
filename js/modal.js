@@ -10,7 +10,8 @@ function editNav() {
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
+const formDataClass = '.formData';
+const formData = document.querySelectorAll(formDataClass);
 const modalCloseBtn = document.querySelector(".close");
 
 // launch modal event
@@ -48,32 +49,19 @@ function validate() {
 
   clearData();
 
-  if (formElements.firstName.required === true) {
-    checkFirstName();
-  }
-  if (formElements.lastName.required === true){
-    checkLastName();
-  }
-  if (formElements.email.required === true){
-    checkEmail();
-  }
-  if (formElements.birthdate.required === true){
-    checkBirthday();
-  }
-  if (formElements.quantity.required === true){
-    checkTournoiQuantity();
-  }
-  if (formElements.location.required === true){
-    checkLocation();
-  }
-  if (formElements.useConditions.required === true){
-    checkUseConditions();
-  }
+  if (formElements.firstName.required === true) {checkFirstName()}
+  if (formElements.lastName.required === true) {checkLastName()}
+  if (formElements.email.required === true) {checkEmail()}
+  if (formElements.birthdate.required === true) {checkBirthday()}
+  if (formElements.quantity.required === true) {checkTournoiQuantity()}
+  if (formElements.location.required === true) {checkLocation()}
+  if (formElements.useConditions.required === true){checkUseConditions()}
   
   if (isValid) {
     submitForm();
   }
-  
+
+  // Send the reservation form
   function submitForm() {
       const reservationForm = document.getElementById("form-reservation");
       const submitForm = document.getElementById("form-submit");
@@ -180,15 +168,14 @@ function validate() {
 
   // Add error message
   function addErrorMessage(element, message) {
-    const parent = element.closest('.formData');
+    const parent = element.closest(formDataClass);
     parent.setAttribute('data-error', message);
     parent.setAttribute('data-error-visible', 'true');
   }
 
   // Change color if it's valid
   function addValidInput(element) {
-    const parent = element.closest('.formData');
+    const parent = element.closest(formDataClass);
     parent.setAttribute('data-valid', 'true');
   }
 }
-
