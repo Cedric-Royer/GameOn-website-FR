@@ -54,9 +54,9 @@
 
       <div class="bground">
         <div class="content">
-          <span class="close"></span>
+          <span class="close" id="close-modal"></span>
           <div class="modal-body">
-            <form id ="form-reservation" name="reserve" action="index.html" method="get">
+            <form id ="form-reservation" name="reserve">
               <div class="formData">
                 <label for="first">Prénom</label><br>
                 <input class="text-control" type="text" id="first" name="first"/><br>
@@ -98,9 +98,15 @@
                 <input class="checkbox-input" type="checkbox" id="checkbox2"/>
                 <label class="checkbox2-label" for="checkbox2"><span class="checkbox-icon"></span> Je souhaite être prévenu des prochains évènements.</label><br>
               </div>
-              <input id="form-submit" class="btn-submit" name="submit" value="C'est parti" onclick="validate()"/>
+              <input id="form-submit" class="btn-submit" name="submit" value="C'est parti" onclick="return validate()"/>
             </form>     
           </div>
+        </div>
+      </div>
+      <div class="validation-message" id ="validation-message">
+        <div class="content">
+          <span class="close" id="close-validation"></span>
+          <p class="valid-text">Merci !<br> Votre réservation a été reçue.</p>
         </div>
       </div>
     </main>

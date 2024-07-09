@@ -12,13 +12,18 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formDataClass = '.formData';
 const formData = document.querySelectorAll(formDataClass);
-const modalCloseBtn = document.querySelector(".close");
+const modalCloseBtn = document.getElementById("close-modal");
+const validationCloseBtn = document.getElementById("close-validation");
+const validationMessage = document.getElementById("validation-message");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// add close button to modal
+// add close button to form
 modalCloseBtn.addEventListener("click", closeModal);
+
+// add close button to validation
+validationCloseBtn.addEventListener("click", closeValidationMessage);
 
 // launch modal form
 function launchModal() {
@@ -30,19 +35,24 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
+// close validation message
+function closeValidationMessage() {
+  validationMessage.style.display = "none";
+}
+
 // check if all data format is correct before validate
 function validate() {
 
   const formElements = {
     firstName: { element: document.getElementById('first'), required: true },
-    lastName: { element: document.getElementById('last'), required: true },
-    email: { element: document.getElementById('email'), required: true },
-    birthdate: { element: document.getElementById('birthdate'), required: true },
-    quantity: { element: document.getElementById('quantity'), required: true},
+    lastName: { element: document.getElementById('last'), required: false },
+    email: { element: document.getElementById('email'), required: false },
+    birthdate: { element: document.getElementById('birthdate'), required: false },
+    quantity: { element: document.getElementById('quantity'), required: false},
     location: { element: document.querySelector('input[name="location"]'),
                 elementDetails: document.querySelector('input[name="location"]:checked'),
-                required: true },
-    useConditions: { element: document.getElementById('checkbox1'), required: true }
+                required: false },
+    useConditions: { element: document.getElementById('checkbox1'), required: false }
   };
 
   let isValid = true;
@@ -65,8 +75,13 @@ function validate() {
   function submitForm() {
       const reservationForm = document.getElementById("form-reservation");
       const submitForm = document.getElementById("form-submit");
-      submitForm.setAttribute("type", "submit");
-      reservationForm.submit();
+      console.log("envoi réussi -2");
+      //submitForm.setAttribute("type", "submit");
+      console.log("envoi réussi -1");
+      //reservationForm.submit();
+      validationMessage.style.display = "block";
+      closeModal()
+      console.log("envoi réussi 0");
   }
 
   // Remove previous error messages and classes
@@ -81,7 +96,11 @@ function validate() {
   // Validate first name
   function checkFirstName() {
     const firstName = formElements.firstName.element;
-    if (firstName.value.length < 2) {
+    if (firstName.value.trim() === '') {
+      addErrorMessage(firstName, "Veuillez saisir votre prénom.");
+      isValid = false;
+    } 
+    else if (firstName.value.length < 2) {
       addErrorMessage(firstName, "Le prénom doit comporter au moins 2 caractères.");
       isValid = false;
   } else {
@@ -92,7 +111,10 @@ function validate() {
   // Validate last name
   function checkLastName() {
     const lastName = formElements.lastName.element;
-    if (lastName.value.length < 2) {
+    if (lastName.value.trim() === '') {
+      addErrorMessage(lastName, "Veuillez saisir votre nom.");
+      isValid = false;
+    } else if (lastName.value.length < 2) {
       addErrorMessage(lastName, "Le nom doit comporter au moins 2 caractères.");
       isValid = false;
   } else {
