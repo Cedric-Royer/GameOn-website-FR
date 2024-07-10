@@ -12,22 +12,28 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formDataClass = '.formData';
 const formData = document.querySelectorAll(formDataClass);
-const modalCloseBtn = document.getElementById("close-modal");
-const validationCloseBtn = document.getElementById("close-validation");
+const modalCloseCross = document.getElementById("close-modal");
+const validationCloseCross = document.getElementById("close-validation");
+const validationCloseBtn = document.getElementById("btn-close");
 const validationMessage = document.getElementById("validation-message");
+const body = document.querySelector("body")
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// add close button to form
-modalCloseBtn.addEventListener("click", closeModal);
+// add close event to exit cross modal
+modalCloseCross.addEventListener("click", closeModal);
 
-// add close button to validation
+// add close event to exit cross validation message
+validationCloseCross.addEventListener("click", closeValidationMessage);
+
+// add close event to exit button validation message
 validationCloseBtn.addEventListener("click", closeValidationMessage);
 
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  window.scroll(0, 1);
 }
 
 // close modal form
@@ -37,11 +43,31 @@ function closeModal() {
 
 // close validation message
 function closeValidationMessage() {
-  validationMessage.style.display = "none";
+  const urlParams = new URLSearchParams(window.location.search);
+
+  urlParams.delete('success');
+
+  const nouvelleURL = window.location.pathname + '?' + urlParams.toString();
+
+  window.location.href = nouvelleURL;
+}
+
+body.onload = printValidationMessage();
+
+// Print validation message if form is valide
+function printValidationMessage() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const success = urlParams.get('success');
+  const first = urlParams.get('first');
+
+  if (success === 'true') {
+    validationMessage.style.display = "block";
+    outputFirstName.textContent = first
+  }
 }
 
 // check if all data format is correct before validate
-function validate() {
+function validate(e) {
 
   const formElements = {
     firstName: { element: document.getElementById('first'), required: true },
@@ -52,7 +78,7 @@ function validate() {
     location: { element: document.querySelector('input[name="location"]'),
                 elementDetails: document.querySelector('input[name="location"]:checked'),
                 required: false },
-    useConditions: { element: document.getElementById('checkbox1'), required: false }
+    useConditions: { element: document.getElementById('checkbox1'), required: true }
   };
 
   let isValid = true;
@@ -71,17 +97,21 @@ function validate() {
     submitForm();
   }
 
+  else {
+    e.preventDefault();
+  }
+
   // Send the reservation form
   function submitForm() {
+      const sucessSubmit = document.getElementById('success')
       const reservationForm = document.getElementById("form-reservation");
       const submitForm = document.getElementById("form-submit");
       console.log("envoi réussi -2");
-      //submitForm.setAttribute("type", "submit");
       console.log("envoi réussi -1");
-      //reservationForm.submit();
-      validationMessage.style.display = "block";
+      sucessSubmit.value = 'true';
       closeModal()
-      console.log("envoi réussi 0");
+      console.log(first.value);
+      outputFirstName.textContent = first.value;
   }
 
   // Remove previous error messages and classes
@@ -200,4 +230,5 @@ function validate() {
     const parent = element.closest(formDataClass);
     parent.setAttribute('data-valid', 'true');
   }
+
 }
