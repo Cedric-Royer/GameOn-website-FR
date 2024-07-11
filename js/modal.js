@@ -104,13 +104,8 @@ function validate(e) {
   // Send the reservation form
   function submitForm() {
       const sucessSubmit = document.getElementById('success')
-      const reservationForm = document.getElementById("form-reservation");
-      const submitForm = document.getElementById("form-submit");
-      console.log("envoi réussi -2");
-      console.log("envoi réussi -1");
       sucessSubmit.value = 'true';
-      closeModal()
-      console.log(first.value);
+      closeModal();
       outputFirstName.textContent = first.value;
   }
 
