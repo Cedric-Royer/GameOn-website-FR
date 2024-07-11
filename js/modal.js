@@ -71,13 +71,13 @@ function validate(e) {
 
   const formElements = {
     firstName: { element: document.getElementById('first'), required: true },
-    lastName: { element: document.getElementById('last'), required: false },
-    email: { element: document.getElementById('email'), required: false },
-    birthdate: { element: document.getElementById('birthdate'), required: false },
-    quantity: { element: document.getElementById('quantity'), required: false},
+    lastName: { element: document.getElementById('last'), required: true },
+    email: { element: document.getElementById('email'), required: true },
+    birthdate: { element: document.getElementById('birthdate'), required: true },
+    quantity: { element: document.getElementById('quantity'), required: true},
     location: { element: document.querySelector('input[name="location"]'),
                 elementDetails: document.querySelector('input[name="location"]:checked'),
-                required: false },
+                required: true },
     useConditions: { element: document.getElementById('checkbox1'), required: true }
   };
 
@@ -184,7 +184,7 @@ function validate(e) {
   function checkTournoiQuantity() {
     const quantity = formElements.quantity.element;
     if (quantity.value.trim() === '') {
-      addErrorMessage(quantity, "Veuillez saisir le nombre de tournois auxquels vous avez participé.");
+      addErrorMessage(quantity, "Veuillez saisir le nombre de tournois.");
       isValid = false;
     }
     else if (isNaN(quantity.value)) {

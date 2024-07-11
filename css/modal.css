@@ -88,9 +88,7 @@
       text-align: left;
     }
   }
-  
-  
-  
+    
    @media screen and (max-width: 540px) {
     .topnav a {display: none;}
     .topnav a.icon {
@@ -166,10 +164,12 @@
     width: 100%;
     overflow: auto;
     background-color: rgba(26, 39, 156, 0.4);
+    overscroll-behavior: contain;
   }
   
   .content {
     margin: 5% auto;
+    bottom: 20px;
     width: 100%;
     max-width: 500px;
     animation-name: modalopen;
@@ -180,6 +180,7 @@
     position: relative;
     color: #fff;
     padding-top: 10px;
+    overscroll-behavior: contain;
   }
   
   .validation-message {
@@ -196,7 +197,7 @@
   
   .valid-text {
     padding-top: 35vh;
-    height: 80vh;
+    height: 76vh;
     width: 60%;
     margin-left: auto;
     margin-right: auto;
@@ -235,7 +236,7 @@
     width: 100%;
     border-radius: 8px;
     font-size: 20px;
-    height: 48px;
+    height: 46.8px;
   }
   
   .formData[data-error]::after {
@@ -543,6 +544,18 @@
     .copyrights {
       margin-top: 50px;
       text-align: center;
+    }
+  }
+
+  @media screen and (max-width: 460px) {
+    .bground { 
+      background-color: transparent;
+    }
+    .validation-message {
+      background-color: transparent;
+    }
+    .content {
+      bottom: -50px;
     }
   }
   
