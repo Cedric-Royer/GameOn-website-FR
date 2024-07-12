@@ -201,7 +201,7 @@ function validate(e) {
     if (!locationDetails) {
       addErrorMessage(location, "Veuillez sélectionner un lieu.");
       isValid = false;
-    } 
+    }
   }
 
   // Validate use conditions checked
